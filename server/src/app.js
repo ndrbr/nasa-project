@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 
-const api = require('./routes/api')
+const api = require("./routes/api");
 
 const app = express();
 
@@ -11,6 +11,7 @@ const whitelist = [
   "http://mypi.local:3000",
   "http://mypi.local:8000",
   "http://localhost:3000",
+  "http://ec2-54-254-167-20.ap-southeast-1.compute.amazonaws.com:8000",
 ];
 const corsOptions = {
   origin: function (origin, callback) {
@@ -33,7 +34,7 @@ app.use(morgan("combined"));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "public")));
 
-app.use('/v1', api)
+app.use("/v1", api);
 
 app.get("/*", (req, res) => {
   console.log("routing...");
